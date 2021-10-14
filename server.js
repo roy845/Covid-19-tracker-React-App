@@ -118,9 +118,8 @@ app.post ('/insertUser', async (req, res) => {
             bcrypt.compare(password, result.rows[0]["password"], function(err, result1) {
               if (result1 == true) 
               {
-             
-            res.cookie('email',result.rows[0].email,{maxAge:1*60*60*1000,httpOnly:false});
-            res.send("userFound")
+               res.cookie('email',result.rows[0].email,{maxAge:1*60*60*1000,httpOnly:false});
+               res.send("userFound")
               }
               
             });
