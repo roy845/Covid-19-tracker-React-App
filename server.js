@@ -150,10 +150,10 @@ app.post ('/insertUser', async (req, res) => {
    app.get ('/clearCookies', async (req, res) => {
     try {
 
-    if(req.cookies["email"]!==undefined && req.cookies["password"]!==undefined )
+    if(req.cookies["email"]!==undefined /*&& req.cookies["password"]!==undefined */)
     {
       res.clearCookie("email");
-      res.clearCookie("password");
+     // res.clearCookie("password");
       res.send("cookiesCleared")
          
     }
