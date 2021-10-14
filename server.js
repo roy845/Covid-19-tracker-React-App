@@ -166,7 +166,7 @@ app.post ('/insertUser', async (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
   })
 
-app.listen(process.env.PORT||3001);
-console.log("listening.... on port 3001");
+app.listen(process.env.PORT||5000);
+console.log("listening.... on port 5000");
 client.connect()
 .then(() => console.log("client Connected to database successfuly"))
