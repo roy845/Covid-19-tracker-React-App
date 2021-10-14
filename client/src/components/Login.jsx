@@ -96,7 +96,7 @@ return(
             className="btn btn-primary"
             onClick={onSubmit}
           />
-          <a href="/forgot">forgot your password?</a>
+        
      </div>
  
     </form>          
