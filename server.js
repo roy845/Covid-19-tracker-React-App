@@ -88,7 +88,7 @@ app.post ('/insertUser', async (req, res) => {
             bcrypt.genSalt(saltRounds, (err, salt) => {
               bcrypt.hash(password,salt,(err, hash) => {
             const userToInsert = client.query(
-              'INSERT INTO public."users" (email,password) VALUES($1,$2)',[email,password],  
+              'INSERT INTO public."users" (email,password) VALUES($1,$2)',[email,hash],  
               (err, result) => {
                 console.log(err, result);
                res.json(userToInsert);
