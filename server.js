@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const pg = require ('pg');
 const path = require('path');
-
+import sslRedirect from 'heroku-ssl-redirect';
 
 
 //db connection postgres
@@ -36,6 +36,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.static(__dirname));
 app.use(favicon(__dirname + '/build/favicon.ico'));
 app.use(express.static(path.join(__dirname,'client/build')));
+app.use(sslRedirect());
 
 if(process.env.MODE_ENV === "production"){
   app.use(favicon(__dirname + '/build/favicon.ico'));
@@ -44,7 +45,7 @@ if(process.env.MODE_ENV === "production"){
 
 
 
-/*app.get("/favicon.ico",(req,res)=>{
+app.get("/favicon.ico",(req,res)=>{
   
   res.sendFile(path.join(__dirname,'client','public','favicon.ico'));
 })
@@ -57,7 +58,7 @@ app.get("/manifest.json",(req,res)=>{
 app.get("/logo192.png",(req,res)=>{
   
   res.sendFile(path.join(__dirname,'client','public','logo192.png'));
-})*/
+})
 
 
 
