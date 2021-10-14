@@ -79,15 +79,17 @@ app.post ('/insertUser', async (req, res) => {
           if(result.rowCount>0)
           res.send("alreadyExistsUser")
           else{
-        
+            bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(password,salt,(err, hash) => {
             const userToInsert = client.query(
-              'INSERT INTO public."users" (email,password) VALUES($1,$2)',[email,password],  
+              'INSERT INTO public."users" (email,password) VALUES($1,$2)',[email,hash],  
               (err, result) => {
                 console.log(err, result);
                res.json(userToInsert);
       
               });
-         
+            });//hash
+          });//salt
           }
           
 
@@ -113,12 +115,15 @@ app.post ('/insertUser', async (req, res) => {
           if(result.rowCount===0)
           res.send("userNotFound")
           else{ 
-            
+            bcrypt.compare(passLogin, result.rows[0]["password"], function(err, result1) {
+              if (result1 == true) 
+              {
              
             res.cookie('email',result.rows[0].email,{maxAge:1*60*60*1000,httpOnly:false});
             res.send("userFound")
+              }
               
-          
+            });
 
              
           }
