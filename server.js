@@ -112,7 +112,7 @@ app.post ('/insertUser', async (req, res) => {
           res.send("userNotFound")
           else{ 
             res.cookie('email',result.rows[0].email,{maxAge:1*60*60*1000,httpOnly:false});
-            res.cookie('password',result.rows[0].password,{maxAge:1*60*60*1000,httpOnly:false})
+            //res.cookie('password',result.rows[0].password,{maxAge:1*60*60*1000,httpOnly:false})
             res.send("userFound")
            // res.json(foundUser) 
              
@@ -130,7 +130,7 @@ app.post ('/insertUser', async (req, res) => {
   app.get ('/isConnected', async (req, res) => {
     try {
 
-    if(req.cookies["email"]!==undefined && req.cookies["password"]!==undefined )
+    if(req.cookies["email"]!==undefined /*&& req.cookies["password"]!==undefined*/ )
     {
         
          res.send("userIsConnected")
