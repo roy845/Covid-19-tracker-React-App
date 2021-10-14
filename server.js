@@ -46,18 +46,19 @@ if(process.env.MODE_ENV === "production"){
 
 
 app.get("/favicon.ico",(req,res)=>{
+  res.sendFile(path.join(__dirname+'/client/build/favicon.ico'));
   
-  res.sendFile(path.join(__dirname,'client','public','favicon.ico'));
+  
 })
 
 app.get("/manifest.json",(req,res)=>{
-  
-  res.sendFile(path.join(__dirname,'client','public','manifest.json'));
+  res.sendFile(path.join(__dirname+'/client/build/manifest.json'));
+ 
 })
 
 app.get("/logo192.png",(req,res)=>{
-  
-  res.sendFile(path.join(__dirname,'client','public','logo192.png'));
+  res.sendFile(path.join(__dirname+'/client/build/logo192.png'));
+ 
 })
 
 
