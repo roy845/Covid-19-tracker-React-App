@@ -6,13 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const pg = require ('pg');
 const path = require('path');
-const crypto = require('crypto');
-const bcrypt = require('bcrypt');
-var SimpleCrypto = require("simple-crypto-js").default;
-const secret = 'appSecretKey';
-const saltRounds = 2;
-const secretKey = "some-unique-key";
-const simpleCrypto = new SimpleCrypto(secretKey);
+
 
 
 
@@ -85,17 +79,15 @@ app.post ('/insertUser', async (req, res) => {
           if(result.rowCount>0)
           res.send("alreadyExistsUser")
           else{
-            bcrypt.genSalt(saltRounds, (err, salt) => {
-              bcrypt.hash(password,salt,(err, hash) => {
+           
             const userToInsert = client.query(
-              'INSERT INTO public."users" (email,password) VALUES($1,$2)',[email,hash],  
+              'INSERT INTO public."users" (email,password) VALUES($1,$2)',[email,password],  
               (err, result) => {
                 console.log(err, result);
                res.json(userToInsert);
       
               });
-            });//hash
-          });//salt 
+         
           }
           
 
@@ -121,13 +113,10 @@ app.post ('/insertUser', async (req, res) => {
           if(result.rowCount===0)
           res.send("userNotFound")
           else{ 
-            bcrypt.compare(password, result.rows[0]["password"], function(err, result1) {
-              if (result1 == true) 
-              {
+          
             res.cookie('email',result.rows[0].email,{maxAge:1*60*60*1000,httpOnly:false});
             res.send("userFound")
-              }
-            });
+          
 
              
           }
