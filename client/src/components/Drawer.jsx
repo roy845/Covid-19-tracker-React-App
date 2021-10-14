@@ -166,7 +166,7 @@ export default function PersistentDrawerLeft(props) {
               <ListItem button key={"Logout"} onClick={() =>{
                  try {
   
-                  const url = `${URL}/clearCookies`;
+                  const url = `/clearCookies`;
                   return axios.get (url,{withCredentials:true} //for saving cookies
                    ).then (res => {
                     if(res.data==="cookiesCleared"){ 

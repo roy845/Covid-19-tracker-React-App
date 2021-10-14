@@ -40,8 +40,9 @@ app.use(express.static(path.join(__dirname,'client/build')));
 
 
 if(process.env.MODE_ENV === "production"){
-  app.use(favicon(__dirname + '/build/favicon.ico'));
   app.use(express.static(path.join(__dirname,'client/build')));
+  app.use(express.static(path.join(__dirname,'client//build/favicon.ico')));
+  app.use(express.static(path.join(__dirname,'client/build/manifest.json')));
 }
 
 

@@ -44,7 +44,7 @@ class App extends React.Component {
   componentDidMount(){
     try {
   
-      const url = `${URL}/isConnected`;
+      const url = `/isConnected`;
       return axios.get (url,{withCredentials:true} //for saving cookies
        ).then (res => {
         if(res.data==="userIsConnected"){ 
