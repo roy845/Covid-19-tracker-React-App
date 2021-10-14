@@ -1,6 +1,7 @@
-const express = require('express')
+const express = require('express');
+const favicon = require('express-favicon');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const pg = require ('pg');
@@ -33,9 +34,11 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.urlencoded({extended:false}));
 app.use(express.static(__dirname));
-//app.use(express.static(path.join(__dirname,'client/build')));
+app.use(favicon(__dirname + '/build/favicon.ico'));
+app.use(express.static(path.join(__dirname,'client/build')));
 
 if(process.env.MODE_ENV === "production"){
+  app.use(favicon(__dirname + '/build/favicon.ico'));
   app.use(express.static(path.join(__dirname,'client/build')));
 }
 
