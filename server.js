@@ -109,13 +109,13 @@ app.post ('/insertUser', async (req, res) => {
       const {email,password} = req.body.user
       console.log(req.body.user)
      
-      client.query('SELECT * from public."users" where email=$1 and password=$2',[email,password],  
+      client.query('SELECT * from public."users" where email=$1',[email],  
         (err, result) => {
           console.log(err, result);
           if(result.rowCount===0)
           res.send("userNotFound")
           else{ 
-            bcrypt.compare(passLogin, result.rows[0]["password"], function(err, result1) {
+            bcrypt.compare(password, result.rows[0]["password"], function(err, result1) {
               if (result1 == true) 
               {
              
