@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const pg = require ('pg');
 const path = require('path');
 const bcrypt = require('bcrypt');
-
+const saltRounds = 2;
 
 
 //db connection postgres
